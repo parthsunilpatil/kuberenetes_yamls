@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: spring-boot-psql-demo-db-migrations
+  labels:
+    app.kubernetes.io/instance: "spring-boot-psql-demo"
+    app.kubernetes.io/version: "1.0"
+  annotations:
+spec:
+  template:
+    metadata:
+      name: spring-boot-psql-demo-db-migrations
+      labels:
+        app.kubernetes.io/instance: "spring-boot-psql-demo"
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: pre-install-job
+        image: "jbergknoff/postgresql-client:latest"
+        command:
+          - /bin/sh
+          - -c
+          - psql
+            -h spring-boot-psql-demo-postgres
+            -p 5432
+            -U admin
+            -d info_db
+            -c "drop table if exists account"
+            -c "create table account(user_id INT PRIMARY KEY, username VARCHAR(50) NOT NULL, email VARCHAR(50) NOT NULL)"
+            -c "insert into account(user_id, username, email) values (1, 'parthp', 'parth.patil@imaginea.com'), (2, 'ppatil', 'ppatil@plymouthrock.com')"
