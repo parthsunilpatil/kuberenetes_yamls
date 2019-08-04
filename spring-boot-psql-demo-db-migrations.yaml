@@ -4,7 +4,7 @@ metadata:
   name: spring-boot-psql-demo-db-migrations
   labels:
     app.kubernetes.io/instance: "spring-boot-psql-demo"
-    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/version: "1.1"
   annotations:
 spec:
   template:
@@ -28,3 +28,6 @@ spec:
             -c "drop table if exists account"
             -c "create table account(user_id INT PRIMARY KEY, username VARCHAR(50) NOT NULL, email VARCHAR(50) NOT NULL)"
             -c "insert into account(user_id, username, email) values (1, 'parthp', 'parth.patil@imaginea.com'), (2, 'ppatil', 'ppatil@plymouthrock.com')"
+            -c "insert into account(user_id, username, email) values (3, 'parthpatil3110', 'parthpatil3110@gmail.com')"
+            -c "create table role(user_id INT PRIMARY KEY, role VARCHAR(50) NOT NULL)"
+            -c "insert into role(user_id, role) values (1, 'Administrator'), (2, 'Developer'), (3, 'User')"

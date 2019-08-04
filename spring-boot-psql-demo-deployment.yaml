@@ -4,7 +4,7 @@ metadata:
   name: spring-boot-psql-demo
   labels:
     app.kubernetes.io/instance: "spring-boot-psql-demo"
-    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/version: "1.1"
 spec:
   replicas: 1
   selector:
@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: spring-boot-psql-demo
-          image: "parthpatil3110/spring-boot-psql-demo:0.1.0"
+          image: "parthpatil3110/spring-boot-psql-demo:0.1.1"
           imagePullPolicy: IfNotPresent
           env:
             - name: PG_HOST
